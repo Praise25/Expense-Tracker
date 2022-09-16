@@ -31,7 +31,6 @@ function App() {
 
   return (
     <div>
-      <h1>I am learning react :D</h1>
       <Expenses expenseData={expenses}/>
     </div>
   );
