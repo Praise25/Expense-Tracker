@@ -1,5 +1,5 @@
-import ExpenseItem from "./ExpenseItem";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
 import Card from "../UI/Card";
 import "./Expenses.css";
 import { useState } from "react";
@@ -9,15 +9,13 @@ const Expenses = (props) => {
 
   const changeYearHandler = (year) => {
     setNewYear(year);
+    props.onFilterYear(year);
   };
 
   return (
     <Card className="expenses">
       <ExpensesFilter selected={newYear} onChangeYear={changeYearHandler} />
-      <ExpenseItem expenseDetails={props.expenseData[0]} />
-      <ExpenseItem expenseDetails={props.expenseData[1]} />
-      <ExpenseItem expenseDetails={props.expenseData[2]} />
-      <ExpenseItem expenseDetails={props.expenseData[3]} />
+      <ExpensesList expenseData={props.expenseData} />
     </Card>
   );
 };

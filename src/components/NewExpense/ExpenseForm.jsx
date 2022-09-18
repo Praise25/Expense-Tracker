@@ -6,32 +6,16 @@ const ExpenseForm = (props) => {
   const [newAmount, setNewAmount] = useState("");
   const [newDate, setNewDate] = useState("");
 
-  // How we would write the state functions if we decided to use only one state
-  // const [userInput, setUserInput] = useState({
-  //   newTitle: "",
-  //   newAmount: "",
-  //   newDate: ""
-  // });
-
   const titleChangeHandler = (event) => {
     setNewTitle(event.target.value);
-    // setUserInput((prev) => {
-    //   return {...prev, newTitle: event.target.value}
-    // })
   };
 
   const amountChangeHandler = (event) => {
     setNewAmount(event.target.value);
-    // setUserInput((prev) => {
-    //   return {...prev, newAmount: event.target.value}
-    // })
   };
 
   const dateChangeHandler = (event) => {
     setNewDate(event.target.value);
-    // setUserInput((prev) => {
-    //   return {...prev, newDate: event.target.value}
-    // })
   };
 
   const submitHandler = (event) => {
@@ -47,6 +31,7 @@ const ExpenseForm = (props) => {
     setNewTitle("");
     setNewAmount("");
     setNewDate("");
+    props.onClickCancel();
   };
 
   return (
@@ -54,11 +39,7 @@ const ExpenseForm = (props) => {
       <div className="new-expense-controls">
         <div className="new-expense-control">
           <label>Title</label>
-          <input 
-            type="text" 
-            value={newTitle} 
-            onChange={titleChangeHandler}
-          />
+          <input type="text" value={newTitle} onChange={titleChangeHandler} />
         </div>
         <div className="new-expense-control">
           <label>Amount</label>
@@ -82,6 +63,7 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense-actions">
+        <button type="button" onClick={props.onClickCancel}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
