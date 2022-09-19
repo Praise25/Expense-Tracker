@@ -3,6 +3,7 @@ import { useState } from "react";
 import ExpenseForm from "./ExpenseForm";
 
 const NewExpense = (props) => {
+  const [isEditing, setIsEditing] = useState(false);
   const saveExpenseDataHandler = (enteredExpenseData) => {
     const expenseData = {
       ...enteredExpenseData,
@@ -12,25 +13,30 @@ const NewExpense = (props) => {
   };
 
   const clearFormControls = () => {
-    setFormContent(
-      <button onClick={renderFormControls}>Add New Expense</button>
-    );
+    setIsEditing(false);
   };
 
   const renderFormControls = () => {
-    setFormContent(
-      <ExpenseForm
-        onSaveExpenseData={saveExpenseDataHandler}
-        onClickCancel={clearFormControls}
-      />
-    );
+    setIsEditing(true);
   };
+  
 
-  const [formContent, setFormContent] = useState(
-    <button onClick={renderFormControls}>Add New Expense</button>
+  return (
+    <div className="new-expense">
+      {!isEditing && (
+        <button type="submit" onClick={renderFormControls}>
+          Add New Expense
+        </button>
+      )}
+
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          onCancel={clearFormControls}
+        />
+      )}
+    </div>
   );
-
-  return <div className="new-expense">{formContent}</div>;
 };
 
 export default NewExpense;
